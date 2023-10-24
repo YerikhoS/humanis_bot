@@ -15,6 +15,7 @@ class AbsenRepository {
     required String minute,
     required String token,
     required String foto,
+    required String day,
   }) async {
     AuthModel? response;
     await api
@@ -29,16 +30,16 @@ class AbsenRepository {
               'imei': imei,
               'sumber': '2',
               'jam_checkclock_zona':
-                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()} $hour:$minute:12',
+                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-$day $hour:$minute:12',
               'kode_device': kodeDevice,
               'zona_waktu': 'WIB',
               'time':
-                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()} $hour:$minute:12',
+                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-$day $hour:$minute:12',
               'tgl_checklock[year]': DateTime.now().year.toString(),
               'tgl_checklock[month]': DateTime.now().month.toString(),
-              'tgl_checklock[day]': DateTime.now().day.toString(),
+              'tgl_checklock[day]': '$day',
               'jam':
-                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().day.toString()} $hour:$minute:12',
+                  '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-$day $hour:$minute:12',
               'tipe_presensi': '1',
               'jam_checklock[hour]': hour,
               'jam_checklock[minute]': minute,
@@ -70,6 +71,7 @@ class AbsenRepository {
     required String minute,
     required String token,
     required String foto,
+    required String day,
   }) async {
     AuthModel? response;
     await api
@@ -91,7 +93,7 @@ class AbsenRepository {
                   '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().month.toString()} $hour:$minute:12',
               'tgl_checklock[year]': DateTime.now().year.toString(),
               'tgl_checklock[month]': DateTime.now().month.toString(),
-              'tgl_checklock[day]': DateTime.now().day.toString(),
+              'tgl_checklock[day]': '$day',
               'jam':
                   '${DateTime.now().year.toString()}-${DateTime.now().month.toString()}-${DateTime.now().month.toString()} $hour:$minute:12',
               'tipe_presensi': '2',

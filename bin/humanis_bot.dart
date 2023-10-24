@@ -28,6 +28,8 @@ Future<void> main() async {
   String hour = '';
   String minute = '';
   String photoUser = '';
+  String day = '';
+
 
   bool waitingForName = false;
   bool waitingForDeviceName = false;
@@ -35,6 +37,7 @@ Future<void> main() async {
   bool waitingForLong = false;
   bool waitingForPhoto = false;
   bool waitingForHour = false;
+  bool waitingForDay = false;
   bool waitingForMinute = false;
   bool waitingForIN = false;
   bool waitingForOut = false;
@@ -169,6 +172,24 @@ Future<void> main() async {
     },
   );
 
+
+  teledart.onMessage(entityType: 'bot_command', keyword: 'setDay').listen((message) {
+    waitingForDay = true;
+    message.reply('ketilan tanggal yang kamu mau ya, contoh (12)');
+  });
+
+  teledart.onMessage().listen(
+    (message) {
+      if (waitingForDay) {
+        if (message.text != null) {
+          day = message.text!;
+          teledart.sendMessage(message.chat.id, 'Tanggal tersimpan, yuk masukan menit kamu dengan ketik /setMinute');
+          waitingForDay = false;
+        }
+      }
+    },
+  );
+
   teledart.onMessage(entityType: 'bot_command', keyword: 'setMinute').listen((message) {
     waitingForMinute = true;
     message.reply('ketilan menit yang kamu mau ya, contoh (15)');
@@ -199,6 +220,8 @@ Future<void> main() async {
       minute: minute,
       token: loginData!.data!.base64 ?? '',
       foto: photoUser,
+      day: day,
+
     );
     message.reply('Clock in kamu berhasil ya');
   });
@@ -215,6 +238,8 @@ Future<void> main() async {
       minute: minute,
       token: loginData!.data!.base64 ?? '',
       foto: photoUser,
+      day: day,
+
     );
     message.reply('Clock out kamu berhasil ya');
   });
